@@ -1,103 +1,24 @@
 import Image from "next/image";
+import NavBar from './../components/Links/NavBar';
+import HomePage from "@/components/Home/HomePage";
+import HomeAbout from "@/components/Home/About";
+import TestimonialsSection from "@/components/Home/Testimonials";
+import OpportunityCard from './../components/Home/OpportunityCard';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div className="font-[family-name:var(--font-montserrat)]">
+      <NavBar />
+      <HomePage />
+      <HomeAbout />
+      <TestimonialsSection />
+      <OpportunityCard />
+      <div className='fixed absolute bottom-[1em] right-[1em] '>
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="40" fill="#38B000" fill-opacity="0.8" />
+          <path d="M52.191 27.8016C50.6704 26.2739 48.8595 25.0625 46.8637 24.2382C44.8679 23.4138 42.7272 22.993 40.5663 23.0001C31.5121 23.0001 24.1327 30.3426 24.1327 39.3515C24.1327 42.239 24.8955 45.044 26.3216 47.519L24 56L32.706 53.723C35.1106 55.0265 37.8136 55.7195 40.5663 55.7195C49.6206 55.7195 57 48.377 57 39.368C57 34.9956 55.292 30.8871 52.191 27.8016ZM40.5663 52.9475C38.1121 52.9475 35.7075 52.2875 33.6015 51.05L33.104 50.753L27.9302 52.106L29.3065 47.09L28.9749 46.5785C27.611 44.4122 26.887 41.9078 26.8854 39.3515C26.8854 31.8606 33.0211 25.7556 40.5497 25.7556C44.198 25.7556 47.6307 27.1746 50.201 29.7486C51.4739 31.0089 52.4827 32.5083 53.1687 34.1596C53.8548 35.8108 54.2044 37.5812 54.1975 39.368C54.2307 46.859 48.095 52.9475 40.5663 52.9475ZM48.0618 42.7835C47.6472 42.5855 45.6241 41.5955 45.2593 41.447C44.8779 41.315 44.6126 41.249 44.3307 41.645C44.0487 42.0575 43.2693 42.9815 43.0372 43.2455C42.805 43.526 42.5563 43.559 42.1417 43.3445C41.7271 43.1465 40.4005 42.701 38.8417 41.315C37.6146 40.226 36.802 38.8895 36.5533 38.477C36.3211 38.0645 36.5201 37.85 36.7357 37.6356C36.9181 37.4541 37.1503 37.1571 37.3492 36.9261C37.5482 36.6951 37.6312 36.5136 37.7638 36.2496C37.8965 35.9691 37.8301 35.7381 37.7307 35.5401C37.6312 35.3421 36.802 33.3291 36.4704 32.5041C36.1387 31.7121 35.7905 31.8111 35.5417 31.7946H34.7457C34.4638 31.7946 34.0327 31.8936 33.6513 32.3061C33.2864 32.7186 32.2251 33.7086 32.2251 35.7216C32.2251 37.7345 33.701 39.6815 33.9 39.9455C34.099 40.226 36.802 44.351 40.9146 46.1165C41.893 46.5455 42.6558 46.793 43.2528 46.9745C44.2312 47.288 45.1266 47.2385 45.8397 47.1395C46.6357 47.024 48.2774 46.1495 48.609 45.1925C48.9573 44.2355 48.9573 43.427 48.8412 43.2455C48.7251 43.064 48.4764 42.9815 48.0618 42.7835Z" fill="white" />
+        </svg>
+      </div>
     </div>
   );
 }
