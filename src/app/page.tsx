@@ -4,6 +4,7 @@ import HomePage from "@/components/Home/HomePage";
 import HomeAbout from "@/components/Home/About";
 import TestimonialsSection from "@/components/Home/Testimonials";
 import OpportunityCard from './../components/Home/OpportunityCard';
+import Footer from './../components/Links/Footer';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <HomeAbout />
       <TestimonialsSection />
       <OpportunityCard />
+      <Footer />
       <div className='fixed absolute bottom-[1em] right-[1em] '>
         <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="40" cy="40" r="40" fill="#38B000" fill-opacity="0.8" />

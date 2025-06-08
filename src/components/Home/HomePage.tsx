@@ -6,22 +6,22 @@ import ButtonDisplay from '../ButtonDisplay';
 export default function HomePage() {
     const color = colors()
     return (
-        <div className="flex items-center justify-between h-[105dvh] px-[12em]">
-            <div className='w-[50%] '>
-                <h1 style={{ color: color.headerText }} className="font-[family-name:var(--font-poppins)] text-[55pt] font-bold leading-none mb-2">Study in your dream country</h1>
-                <p className="text-md text-gray-700 mb-4">Discover endless opportunities and unlock your global potential. Whether you're aiming for world-class education, cultural enrichment, or a thriving career path abroad — we guide you every step of the way to turn your academic dreams into reality.</p>
-                <svg className='mb-3 mx-[-10em] ' width="84" height="36" viewBox="0 0 84 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className="flex md:flex-row flex-col md:items-center justify-between mt-[14dvh] md:mt-0 h-[84dvh] md:h-[105dvh] px-[1em] md:px-[12em]">
+            <div className='md:w-[50%] '>
+                <h1 style={{ color: color.headerText }} className="font-[family-name:var(--font-poppins)] md:text-[55pt] text-[35pt] font-bold leading-none md:mb-2">Study in your dream country</h1>
+                <p className="text-md text-gray-700 md:mb-4">Discover endless opportunities and unlock your global potential. Whether you're aiming for world-class education, cultural enrichment, or a thriving career path abroad — we guide you every step of the way to turn your academic dreams into reality.</p>
+                <svg className='mb-3 mx-[-10em] hidden md:block' width="84" height="36" viewBox="0 0 84 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M20.0854 8.3121L20.1355 8.34359C20.3415 8.48515 20.5474 8.63368 20.6979 8.71582C22.7504 9.83255 24.536 11.7585 26.01 13.5166C29.5347 17.7249 33.2904 21.748 37.1196 25.6959C38.1924 26.8021 39.4031 27.779 40.5458 28.8136C40.8843 29.1194 41.2263 29.4183 41.5684 29.7189C41.7189 29.8482 41.9607 30.1924 42.1165 30.341C42.2275 30.4493 42.3367 30.5018 42.4084 30.5228C42.5911 30.5717 42.7361 30.5263 42.8508 30.4302C42.926 30.369 43.0299 30.2536 43.0281 30.023C43.0012 27.5972 41.8102 24.4096 40.2019 21.0768C37.8395 16.1817 34.5889 10.9616 33.02 7.43308C32.608 6.50509 31.4349 4.75566 30.6183 3.14609C30.2547 2.43305 29.952 1.75496 29.8571 1.2097C30.1687 1.53651 30.5179 1.97872 30.7561 2.19368C31.7859 3.12167 32.6653 4.20165 33.6361 5.18556C36.5876 8.17926 47.3641 15.4547 51.0625 17.5729C54.0535 19.2873 72.019 27.461 83.5226 28.1967C83.7698 28.2125 83.9829 28.0307 83.999 27.7895C84.0152 27.5483 83.8271 27.3403 83.5818 27.3246C72.2161 26.5976 54.4708 18.5131 51.5157 16.8196C47.8584 14.7242 37.1984 7.53963 34.2826 4.58089C33.2994 3.58299 32.4057 2.49245 31.3633 1.55223C30.9872 1.21319 30.3371 0.369094 29.9466 0.127921C29.7263 -0.0083936 29.5239 -0.0206044 29.3788 0.0213382C29.2015 0.0737674 29.0117 0.204837 28.9562 0.542132C28.8666 1.09438 29.0618 1.87033 29.4326 2.72667C30.2063 4.50926 31.7197 6.70253 32.1997 7.78082C33.7704 11.3145 37.0247 16.5452 39.3924 21.4491C40.7105 24.1824 41.7583 26.8073 42.0502 28.9657C41.7493 28.7035 41.452 28.4396 41.1547 28.1722C40.0246 27.1516 38.83 26.1887 37.7697 25.0964C33.9567 21.1625 30.2135 17.1552 26.7031 12.9643C25.161 11.1241 23.2805 9.12125 21.1349 7.95208C20.8322 7.7878 20.2949 7.35961 19.9904 7.27223C19.7952 7.2163 19.6304 7.24259 19.5105 7.30551C19.3618 7.38066 19.2274 7.51697 19.2059 7.78261C19.1146 8.86964 19.4513 10.7029 20.0173 12.842C21.305 17.7004 23.7533 24.1841 24.6417 26.8772C25.2381 28.686 25.9133 30.4808 26.4506 32.3071C26.4775 32.398 26.841 34.1701 27.0129 35.0142C26.5097 34.8447 25.8309 34.4951 25.0626 34.0652C22.3635 32.5518 18.6955 29.9425 17.5726 29.1648C15.418 27.6741 13.3082 26.1328 11.1178 24.691C7.66116 22.4155 4.1329 20.2537 0.701344 17.9416C0.49896 17.8035 0.219569 17.8542 0.0798712 18.0517C-0.0616179 18.2509 -0.00969985 18.5235 0.192683 18.6598C3.62603 20.9755 7.15788 23.1391 10.6181 25.4162C12.8013 26.8528 14.9057 28.3907 17.055 29.8779C18.1887 30.6626 21.8925 33.2945 24.6166 34.8219C25.8649 35.5228 26.9323 35.9807 27.5001 35.9999C27.6577 36.0034 27.9765 35.9195 27.998 35.4948C28.0249 34.9513 27.3496 32.1953 27.312 32.0659C26.7711 30.2309 26.0924 28.4274 25.4942 26.6099C24.6094 23.9255 22.1683 17.4644 20.8859 12.6235C20.4238 10.8811 20.1068 9.35544 20.0854 8.3121Z" fill="black" />
                 </svg>
-                <ButtonDisplay text='Grab Ur Seat Today' px='px-[3em] py-[1em] ' onclick="Contact Us" />
+                <ButtonDisplay text='Grab Ur Seat Today' px='px-[3em] py-[1em] md:block hidden ' onclick="Contact Us" />
             </div>
-            <div className='flex gap-[2em] '>
-                <svg width="52" height="49" viewBox="0 0 52 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div className='flex md:gap-[2em] gap-[0.5em] mt-[1em] md:mt-0 justify-center '>
+                <svg width="52" height="49" className='hidden md:block ' viewBox="0 0 52 49" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <ellipse cx="26.1165" cy="24.3612" rx="25.1819" ry="23.8947" fill="#FF9257" />
                     <path d="M24.4079 12.8959C24.9064 11.6761 25.1556 11.0663 25.5102 10.8847C25.8177 10.7273 26.1823 10.7273 26.4898 10.8847C26.8444 11.0662 27.0936 11.6761 27.5921 12.8959L29.4203 17.3697C29.8997 18.5429 30.1395 19.1295 30.5122 19.6229C30.8426 20.0602 31.2485 20.4423 31.7132 20.7532C32.2374 21.104 32.8607 21.3297 34.1072 21.7809L38.5325 23.3828C39.9084 23.8809 40.5964 24.1299 40.7907 24.4947C40.9589 24.8106 40.9589 25.1894 40.7907 25.5053C40.5964 25.8701 39.9084 26.1191 38.5325 26.6172L34.1072 28.2191C32.8607 28.6703 32.2374 28.896 31.7132 29.2468C31.2486 29.5577 30.8426 29.9398 30.5122 30.3771C30.1395 30.8705 29.8997 31.4571 29.4203 32.6303L27.5921 37.1041C27.0936 38.3239 26.8444 38.9338 26.4898 39.1153C26.1823 39.2727 25.8177 39.2727 25.5102 39.1153C25.1556 38.9338 24.9064 38.3239 24.4079 37.1041L22.5797 32.6303C22.1003 31.4571 21.8605 30.8705 21.4878 30.3771C21.1574 29.9398 20.7515 29.5577 20.2868 29.2468C19.7626 28.896 19.1393 28.6703 17.8928 28.2191L13.4675 26.6172C12.0916 26.1191 11.4036 25.8701 11.2093 25.5053C11.0411 25.1894 11.0411 24.8106 11.2093 24.4947C11.4036 24.1299 12.0916 23.8809 13.4675 23.3828L17.8928 21.7809C19.1393 21.3297 19.7626 21.104 20.2868 20.7532C20.7515 20.4423 21.1574 20.0602 21.4878 19.6229C21.8605 19.1295 22.1003 18.5429 22.5797 17.3697L24.4079 12.8959Z" fill="white" />
                 </svg>
-                <ImageDisplay src='/Bg1.png' className='mt-[-2em] ' alt='Background Image 1' width={250} />
-                <div className='absolute bottom-[10em] right-[25em] ' >
+                <ImageDisplay src='/Bg1.png' className='md:mt-[-2em] rounded-[2em] ' alt='Background Image 1' width={300} height={500} />
+                <div className='absolute md:bottom-[5em] bottom-[3.5em] md:right-[25em] right-[12em] ' >
                     <svg width="141" height="61" viewBox="0 0 141 61" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8 56C8 53.2386 6.20914 51 4 51C1.79086 51 9.47992e-08 53.2386 6.10707e-08 56C2.73423e-08 58.7614 1.79086 61 4 61C6.20914 61 8 58.7614 8 56Z" fill="#245D51" />
                         <path d="M8 30.5C8 28.0147 6.20914 26 4 26C1.79086 26 8.53192e-08 28.0147 5.49636e-08 30.5C2.4608e-08 32.9853 1.79086 35 4 35C6.20914 35 8 32.9853 8 30.5Z" fill="#245D51" />
@@ -43,8 +43,9 @@ export default function HomePage() {
                         <path d="M141 4C141 1.79086 138.985 8.13259e-08 136.5 5.23911e-08C134.015 2.34563e-08 132 1.79086 132 4C132 6.20914 134.015 8 136.5 8C138.985 8 141 6.20914 141 4Z" fill="#245D51" />
                     </svg>
                 </div>
-                <ImageDisplay src='/Bg2.png' className='mt-[4em] ' alt='Background Image 2' width={250} />
+                <ImageDisplay src='/Bg2.png' className='md:mt-[4em] mt-[1em] rounded-[2em] ' alt='Background Image 2' width={400} />
             </div>
+            <ButtonDisplay text='Grab Ur Seat Today' px='px-[0.5em]' py='py-[1em] md:hidden w-[15em] z-10 ' onclick="Contact Us" />
         </div>
     );
 }

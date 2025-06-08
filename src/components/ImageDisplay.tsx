@@ -44,8 +44,8 @@ export default function ImageDisplay({src, alt, width = 500, height = 300, fill 
   return (
     <div className={`relative ${className}`}>
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center animate-pulse" style={{ width: fill ? '100%' : width, height: fill ? '100%' : height }}>
-          <span className="text-gray-400">Loading...</span>
+        <div className="absolute inset-0 flex items-center justify-center" style={{ width: fill ? '100%' : "1em", height: fill ? '100%' : "1em" }}>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-1 border-gray-400"></div>
         </div>
       )}
 
@@ -56,7 +56,7 @@ export default function ImageDisplay({src, alt, width = 500, height = 300, fill 
         height={fill ? undefined : height}
         fill={fill}
         quality={quality}
-        className={`${isLoading ? 'opacity-0' : 'opacity-100'} rounded-md transition-opacity duration-300`}
+        className={`${isLoading ? 'opacity-0' : 'opacity-100'} ${className} transition-opacity duration-300`}
         onLoad={handleLoadingComplete}
         onError={handleError}
         unoptimized={true}
