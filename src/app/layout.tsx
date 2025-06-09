@@ -14,12 +14,6 @@ const montserrat = Montserrat({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const lavishly = Lavishly_Yours({
-  variable: "--font-lavishly",
-  subsets: ["latin"],
-  weight: "400"
-});
-
 export const metadata: Metadata = {
   title: "Edufy : Your Next Destination",
   description: "",
@@ -33,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.variable} ${poppins.variable} ${lavishly.variable} antialiased`}
+        className={`${montserrat.variable} ${poppins.variable} antialiased`}
       >
         {children}
       </body>

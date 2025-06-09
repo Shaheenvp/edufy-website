@@ -44,7 +44,7 @@ export default function HomeAbout() {
                 </div>
                 <div className="justify-center md:w-[50%] w-[100%] md:flex flex-col ">
                     <Headers text="About Us" className="md:text-start text-center " />
-                    <p className="md:text-[13pt] text-[11pt] ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+                    <p className="md:text-[13pt] text-[11pt] ">From they fine john he give of rich he. They age and draw mrs like. Improving end distrusts may instantly was household applauded incommode. Why kept very ever home mrs. Considered sympathize ten uncommonly occasional assistance sufficient not. </p>
                     <div className="md:mt-[2.5em] my-[1em] ">
                         <ButtonDisplay text="Expore More" onclick="Explore" px="px-[4em] " py="py-[1em] " />
                     </div>
