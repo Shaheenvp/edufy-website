@@ -44,17 +44,17 @@ export default function DrawerUi() {
   const color = colors();
 
   const courses = [
-    { name: 'Web Development', href: '/courses/web-development' },
-    { name: 'Data Science', href: '/courses/data-science' },
-    { name: 'Digital Marketing', href: '/courses/digital-marketing' },
-    { name: 'UI/UX Design', href: '/courses/ui-ux-design' }
+    { name: 'Business And Management', href: '' },
+    { name: 'Hospitality And Tourism', href: '' },
+    { name: 'Engineering', href: '' },
+    { name: 'Accounting And Finance', href: '' }
   ];
 
   const destinations = [
-    { name: 'Europe Tours', href: '/destinations/europe' },
-    { name: 'Asia Pacific', href: '/destinations/asia' },
-    { name: 'North America', href: '/destinations/north-america' },
-    { name: 'Adventure Trips', href: '/destinations/adventure' }
+    { name: 'United Kingdom', href: '' },
+    { name: 'Ireland', href: '' },
+    { name: 'Germany', href: '' },
+    { name: 'Canada', href: '' }
   ];
 
   const DrawerList = (
