@@ -16,7 +16,7 @@ export default function HomePage() {
 
         const handleMouseMove = (e: MouseEvent) => {
             setMousePosition({ x: e.clientX, y: e.clientY });
-        };
+    };
 
         window.addEventListener('mousemove', handleMouseMove);
         return () => window.removeEventListener('mousemove', handleMouseMove);
@@ -71,7 +71,7 @@ export default function HomePage() {
                                         />
                                     </span>
                                 </span>
-                            </h1>
+                </h1>
 
                             <p className="text-lg sm:text-xl text-[#64748B] max-w-2xl leading-relaxed">
                                 Specialized in MBBS, Nursing, and medical courses in Georgia, Uzbekistan, and Russia.
@@ -83,11 +83,11 @@ export default function HomePage() {
 
                         {/* CTA Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <ButtonDisplay
+                <ButtonDisplay
                                 text="Start Your Journey"
                                 px="px-8 py-4"
-                                onclick="Contact Us"
-                            />
+                    onclick="Contact Us"
+                />
                             <button className="btn-secondary">
                                 Watch Our Story
                             </button>
@@ -103,20 +103,20 @@ export default function HomePage() {
                                 <div className="text-sm font-medium">Stanford</div>
                             </div>
                         </div>
-                    </div>
+            </div>
 
                     {/* Right Content - Premium Image Showcase */}
                     <div className={`relative flex justify-end items-center ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
                         <div className="relative w-full max-w-2xl group -mr-4 sm:-mr-8 lg:-mr-12 xl:-mr-16">
                             {/* Main Image Container */}
                             <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl group-hover:shadow-3xl transition-all duration-500 hover:scale-105">
-                                <ImageDisplay
-                                    src="/Bg1.png"
+                <ImageDisplay
+                    src="/Bg1.png"
                                     className="w-full h-96 sm:h-[28rem] lg:h-[32rem] object-cover transition-transform duration-500 group-hover:scale-110"
                                     alt="International students at prestigious university"
                                     width={600}
-                                    height={500}
-                                />
+                    height={500}
+                />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                                 <div className="absolute bottom-6 left-6 text-white">
                                     <h3 className="text-xl font-semibold mb-2">Harvard University</h3>
@@ -155,14 +155,14 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
 
             {/* Scroll Indicator */}
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
                 <div className="w-6 h-10 border-2 border-[#FF9257] rounded-full flex justify-center">
                     <div className="w-1 h-3 bg-[#FF9257] rounded-full mt-2 animate-pulse"></div>
-                </div>
             </div>
+        </div>
         </section>
     );
 }

@@ -33,8 +33,8 @@ export default function PremiumTestimonialsSection() {
   }, []);
 
   const testimonials = [
-  {
-    id: 1,
+    {
+      id: 1,
       name: "Sarah Johnson",
       role: "Computer Science Graduate",
       university: "MIT",
@@ -43,9 +43,9 @@ export default function PremiumTestimonialsSection() {
       rating: 5,
       text: "Edufy transformed my dream of studying at MIT into reality. Their guidance throughout the application process was exceptional, and I couldn't have done it without their support.",
       achievement: "Full Scholarship Recipient"
-  },
-  {
-    id: 2,
+    },
+    {
+      id: 2,
       name: "Ahmed Hassan",
       role: "MBA Graduate",
       university: "Harvard Business School",
@@ -54,9 +54,9 @@ export default function PremiumTestimonialsSection() {
       rating: 5,
       text: "The team at Edufy made my Harvard MBA journey seamless. From application to visa, they handled everything with professionalism and care.",
       achievement: "Dean's List Student"
-  },
-  {
-    id: 3,
+    },
+    {
+      id: 3,
       name: "Priya Patel",
       role: "Medical Student",
       university: "Oxford University",
@@ -125,7 +125,7 @@ export default function PremiumTestimonialsSection() {
                       <h4 className="font-semibold text-[#002448]">{testimonials[currentTestimonial].name}</h4>
                       <p className="text-sm text-[#64748B]">{testimonials[currentTestimonial].role}</p>
                     </div>
-        </div>
+                  </div>
 
                   <div className="flex items-center space-x-4 text-sm">
                     <div className="flex items-center space-x-2">
@@ -135,14 +135,14 @@ export default function PremiumTestimonialsSection() {
                     <div className="flex items-center space-x-2">
                       <span className="w-2 h-2 bg-[#EC651B] rounded-full"></span>
                       <span className="text-[#64748B]">{testimonials[currentTestimonial].country}</span>
-                        </div>
-                      </div>
+                    </div>
+                  </div>
 
                   <div className="inline-flex items-center px-3 py-1 bg-[#FF9257]/10 rounded-full text-[#FF9257] text-sm font-medium">
                     🏆 {testimonials[currentTestimonial].achievement}
-                    </div>
-                        </div>
-                      </div>
+                  </div>
+                </div>
+              </div>
 
               {/* University Showcase */}
               <div className="relative">
@@ -160,22 +160,22 @@ export default function PremiumTestimonialsSection() {
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
           </div>
-            </div>
 
           {/* Navigation Dots */}
           <div className="flex justify-center space-x-2 mt-8">
             {testimonials.map((_, index) => (
-                <button
+              <button
                 key={index}
                 onClick={() => setCurrentTestimonial(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentTestimonial
                   ? 'bg-[#FF9257] scale-125'
                   : 'bg-[#E2E8F0] hover:bg-[#FF9257]/50'
                   }`}
-                />
-              ))}
+              />
+            ))}
           </div>
         </div>
 

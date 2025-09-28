@@ -4,13 +4,13 @@ import Link from 'next/link';
 import colors from './../../helpers/colors';
 import ImageDisplay from '../ImageDisplay';
 import { motion } from 'framer-motion';
-import { 
-  Instagram, 
-  Facebook, 
-  Twitter, 
-  LinkedIn, 
-  Email, 
-  Phone, 
+import {
+  Instagram,
+  Facebook,
+  Twitter,
+  LinkedIn,
+  Email,
+  Phone,
   LocationOn,
   School,
   Business,
@@ -25,15 +25,15 @@ export default function Footer() {
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { 
-        delay: 0.2, 
-        duration: 0.6, 
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.2,
+        duration: 0.6,
         ease: "easeOut" as const,
         staggerChildren: 0.1
-      } 
+      }
     },
   };
 
@@ -51,7 +51,7 @@ export default function Footer() {
         <div className="absolute bottom-20 left-16 w-12 h-12 bg-[#FF9257] rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <motion.div 
+      <motion.div
         className="container relative z-10"
         variants={containerVariants}
         initial="hidden"
@@ -60,7 +60,7 @@ export default function Footer() {
       >
         {/* Main Footer Content */}
         <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-12 py-16">
-          
+
           {/* Company Info */}
           <motion.div variants={itemVariants} className="space-y-6">
             <div className="flex items-center space-x-3">
@@ -77,7 +77,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-300 leading-relaxed">
-              Your trusted partner for medical education in Georgia, Uzbekistan, and Russia. 
+              Your trusted partner for medical education in Georgia, Uzbekistan, and Russia.
               We specialize in MBBS, Nursing, and medical courses with 98% success rate.
             </p>
             <div className="flex space-x-4">
@@ -205,7 +205,7 @@ export default function Footer() {
         </div>
 
         {/* Newsletter Section */}
-        <motion.div 
+        <motion.div
           variants={itemVariants}
           className="border-t border-white/10 py-8"
         >
@@ -232,7 +232,7 @@ export default function Footer() {
         </motion.div>
 
         {/* Bottom Bar */}
-        <motion.div 
+        <motion.div
           variants={itemVariants}
           className="border-t border-white/10 py-6"
         >
