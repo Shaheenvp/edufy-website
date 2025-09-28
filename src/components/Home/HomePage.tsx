@@ -1,52 +1,168 @@
-'use client'
+'use client';
+
 import colors from '@/helpers/colors';
 import ImageDisplay from './../ImageDisplay';
 import ButtonDisplay from '../ButtonDisplay';
+import TypewriterText from '../TypewriterText';
+import { useState, useEffect } from 'react';
 
 export default function HomePage() {
-    const color = colors()
+    const color = colors();
+    const [isVisible, setIsVisible] = useState(false);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+    useEffect(() => {
+        setIsVisible(true);
+
+        const handleMouseMove = (e: MouseEvent) => {
+            setMousePosition({ x: e.clientX, y: e.clientY });
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
     return (
-        <div className="flex md:flex-row flex-col md:items-center justify-between mt-[14dvh] md:mt-0 h-[84dvh] md:h-[105dvh] px-[1em] md:px-[12em]">
-            <div className='md:w-[50%] '>
-                <h1 style={{ color: color.headerText }} className="font-[family-name:var(--font-poppins)] md:text-[55pt] text-[35pt] font-bold leading-none md:mb-2">Study in your dream country</h1>
-                <p className="text-md text-gray-700 md:mb-4">Discover endless opportunities and unlock your global potential. Whether you're aiming for world-class education, cultural enrichment, or a thriving career path abroad — we guide you every step of the way to turn your academic dreams into reality.</p>
-                <svg className='mb-3 mx-[-10em] hidden md:block' width="84" height="36" viewBox="0 0 84 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M20.0854 8.3121L20.1355 8.34359C20.3415 8.48515 20.5474 8.63368 20.6979 8.71582C22.7504 9.83255 24.536 11.7585 26.01 13.5166C29.5347 17.7249 33.2904 21.748 37.1196 25.6959C38.1924 26.8021 39.4031 27.779 40.5458 28.8136C40.8843 29.1194 41.2263 29.4183 41.5684 29.7189C41.7189 29.8482 41.9607 30.1924 42.1165 30.341C42.2275 30.4493 42.3367 30.5018 42.4084 30.5228C42.5911 30.5717 42.7361 30.5263 42.8508 30.4302C42.926 30.369 43.0299 30.2536 43.0281 30.023C43.0012 27.5972 41.8102 24.4096 40.2019 21.0768C37.8395 16.1817 34.5889 10.9616 33.02 7.43308C32.608 6.50509 31.4349 4.75566 30.6183 3.14609C30.2547 2.43305 29.952 1.75496 29.8571 1.2097C30.1687 1.53651 30.5179 1.97872 30.7561 2.19368C31.7859 3.12167 32.6653 4.20165 33.6361 5.18556C36.5876 8.17926 47.3641 15.4547 51.0625 17.5729C54.0535 19.2873 72.019 27.461 83.5226 28.1967C83.7698 28.2125 83.9829 28.0307 83.999 27.7895C84.0152 27.5483 83.8271 27.3403 83.5818 27.3246C72.2161 26.5976 54.4708 18.5131 51.5157 16.8196C47.8584 14.7242 37.1984 7.53963 34.2826 4.58089C33.2994 3.58299 32.4057 2.49245 31.3633 1.55223C30.9872 1.21319 30.3371 0.369094 29.9466 0.127921C29.7263 -0.0083936 29.5239 -0.0206044 29.3788 0.0213382C29.2015 0.0737674 29.0117 0.204837 28.9562 0.542132C28.8666 1.09438 29.0618 1.87033 29.4326 2.72667C30.2063 4.50926 31.7197 6.70253 32.1997 7.78082C33.7704 11.3145 37.0247 16.5452 39.3924 21.4491C40.7105 24.1824 41.7583 26.8073 42.0502 28.9657C41.7493 28.7035 41.452 28.4396 41.1547 28.1722C40.0246 27.1516 38.83 26.1887 37.7697 25.0964C33.9567 21.1625 30.2135 17.1552 26.7031 12.9643C25.161 11.1241 23.2805 9.12125 21.1349 7.95208C20.8322 7.7878 20.2949 7.35961 19.9904 7.27223C19.7952 7.2163 19.6304 7.24259 19.5105 7.30551C19.3618 7.38066 19.2274 7.51697 19.2059 7.78261C19.1146 8.86964 19.4513 10.7029 20.0173 12.842C21.305 17.7004 23.7533 24.1841 24.6417 26.8772C25.2381 28.686 25.9133 30.4808 26.4506 32.3071C26.4775 32.398 26.841 34.1701 27.0129 35.0142C26.5097 34.8447 25.8309 34.4951 25.0626 34.0652C22.3635 32.5518 18.6955 29.9425 17.5726 29.1648C15.418 27.6741 13.3082 26.1328 11.1178 24.691C7.66116 22.4155 4.1329 20.2537 0.701344 17.9416C0.49896 17.8035 0.219569 17.8542 0.0798712 18.0517C-0.0616179 18.2509 -0.00969985 18.5235 0.192683 18.6598C3.62603 20.9755 7.15788 23.1391 10.6181 25.4162C12.8013 26.8528 14.9057 28.3907 17.055 29.8779C18.1887 30.6626 21.8925 33.2945 24.6166 34.8219C25.8649 35.5228 26.9323 35.9807 27.5001 35.9999C27.6577 36.0034 27.9765 35.9195 27.998 35.4948C28.0249 34.9513 27.3496 32.1953 27.312 32.0659C26.7711 30.2309 26.0924 28.4274 25.4942 26.6099C24.6094 23.9255 22.1683 17.4644 20.8859 12.6235C20.4238 10.8811 20.1068 9.35544 20.0854 8.3121Z" fill="black" />
-                </svg>
-                <ButtonDisplay text='Grab Ur Seat Today' px='px-[3em] py-[1em] md:block hidden ' onclick="Contact Us" />
-            </div>
-            <div className='flex md:gap-[2em] gap-[0.5em] mt-[1em] md:mt-0 justify-center '>
-                <svg width="52" height="49" className='hidden md:block ' viewBox="0 0 52 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <ellipse cx="26.1165" cy="24.3612" rx="25.1819" ry="23.8947" fill="#FF9257" />
-                    <path d="M24.4079 12.8959C24.9064 11.6761 25.1556 11.0663 25.5102 10.8847C25.8177 10.7273 26.1823 10.7273 26.4898 10.8847C26.8444 11.0662 27.0936 11.6761 27.5921 12.8959L29.4203 17.3697C29.8997 18.5429 30.1395 19.1295 30.5122 19.6229C30.8426 20.0602 31.2485 20.4423 31.7132 20.7532C32.2374 21.104 32.8607 21.3297 34.1072 21.7809L38.5325 23.3828C39.9084 23.8809 40.5964 24.1299 40.7907 24.4947C40.9589 24.8106 40.9589 25.1894 40.7907 25.5053C40.5964 25.8701 39.9084 26.1191 38.5325 26.6172L34.1072 28.2191C32.8607 28.6703 32.2374 28.896 31.7132 29.2468C31.2486 29.5577 30.8426 29.9398 30.5122 30.3771C30.1395 30.8705 29.8997 31.4571 29.4203 32.6303L27.5921 37.1041C27.0936 38.3239 26.8444 38.9338 26.4898 39.1153C26.1823 39.2727 25.8177 39.2727 25.5102 39.1153C25.1556 38.9338 24.9064 38.3239 24.4079 37.1041L22.5797 32.6303C22.1003 31.4571 21.8605 30.8705 21.4878 30.3771C21.1574 29.9398 20.7515 29.5577 20.2868 29.2468C19.7626 28.896 19.1393 28.6703 17.8928 28.2191L13.4675 26.6172C12.0916 26.1191 11.4036 25.8701 11.2093 25.5053C11.0411 25.1894 11.0411 24.8106 11.2093 24.4947C11.4036 24.1299 12.0916 23.8809 13.4675 23.3828L17.8928 21.7809C19.1393 21.3297 19.7626 21.104 20.2868 20.7532C20.7515 20.4423 21.1574 20.0602 21.4878 19.6229C21.8605 19.1295 22.1003 18.5429 22.5797 17.3697L24.4079 12.8959Z" fill="white" />
-                </svg>
-                <ImageDisplay src='/Bg1.png' className='md:mt-[-2em] rounded-[2em] ' alt='Background Image 1' width={300} height={500} />
-                <div className='absolute md:bottom-[5em] bottom-[3.5em] md:right-[25em] right-[12em] ' >
-                    <svg width="141" height="61" viewBox="0 0 141 61" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 56C8 53.2386 6.20914 51 4 51C1.79086 51 9.47992e-08 53.2386 6.10707e-08 56C2.73423e-08 58.7614 1.79086 61 4 61C6.20914 61 8 58.7614 8 56Z" fill="#245D51" />
-                        <path d="M8 30.5C8 28.0147 6.20914 26 4 26C1.79086 26 8.53192e-08 28.0147 5.49636e-08 30.5C2.4608e-08 32.9853 1.79086 35 4 35C6.20914 35 8 32.9853 8 30.5Z" fill="#245D51" />
-                        <path d="M8 4C8 1.79086 6.20914 7.22897e-08 4 4.65699e-08C1.79086 2.085e-08 7.58393e-08 1.79086 4.88566e-08 4C2.18738e-08 6.20914 1.79086 8 4 8C6.20914 8 8 6.20914 8 4Z" fill="#245D51" />
-                        <path d="M34 56C34 53.2386 32.2091 51 30 51C27.7909 51 26 53.2386 26 56C26 58.7614 27.7909 61 30 61C32.2091 61 34 58.7614 34 56Z" fill="#245D51" />
-                        <path d="M62 56C62 53.2386 59.7614 51 57 51C54.2386 51 52 53.2386 52 56C52 58.7614 54.2386 61 57 61C59.7614 61 62 58.7614 62 56Z" fill="#245D51" />
-                        <path d="M88 56C88 53.2386 85.7614 51 83 51C80.2386 51 78 53.2386 78 56C78 58.7614 80.2386 61 83 61C85.7614 61 88 58.7614 88 56Z" fill="#245D51" />
-                        <path d="M115 56C115 53.2386 112.985 51 110.5 51C108.015 51 106 53.2386 106 56C106 58.7614 108.015 61 110.5 61C112.985 61 115 58.7614 115 56Z" fill="#245D51" />
-                        <path d="M141 56C141 53.2386 138.985 51 136.5 51C134.015 51 132 53.2386 132 56C132 58.7614 134.015 61 136.5 61C138.985 61 141 58.7614 141 56Z" fill="#245D51" />
-                        <path d="M34 30.5C34 28.0147 32.2091 26 30 26C27.7909 26 26 28.0147 26 30.5C26 32.9853 27.7909 35 30 35C32.2091 35 34 32.9853 34 30.5Z" fill="#245D51" />
-                        <path d="M62 30.5C62 28.0147 59.7614 26 57 26C54.2386 26 52 28.0147 52 30.5C52 32.9853 54.2386 35 57 35C59.7614 35 62 32.9853 62 30.5Z" fill="#245D51" />
-                        <path d="M88 30.5C88 28.0147 85.7614 26 83 26C80.2386 26 78 28.0147 78 30.5C78 32.9853 80.2386 35 83 35C85.7614 35 88 32.9853 88 30.5Z" fill="#245D51" />
-                        <path d="M115 30.5C115 28.0147 112.985 26 110.5 26C108.015 26 106 28.0147 106 30.5C106 32.9853 108.015 35 110.5 35C112.985 35 115 32.9853 115 30.5Z" fill="#245D51" />
-                        <path d="M141 30.5C141 28.0147 138.985 26 136.5 26C134.015 26 132 28.0147 132 30.5C132 32.9853 134.015 35 136.5 35C138.985 35 141 32.9853 141 30.5Z" fill="#245D51" />
-                        <path d="M34 4C34 1.79086 32.2091 7.22897e-08 30 4.65699e-08C27.7909 2.085e-08 26 1.79086 26 4C26 6.20914 27.7909 8 30 8C32.2091 8 34 6.20914 34 4Z" fill="#245D51" />
-                        <path d="M62 4C62 1.79086 59.7614 9.03621e-08 57 5.82123e-08C54.2386 2.60625e-08 52 1.79086 52 4C52 6.20914 54.2386 8 57 8C59.7614 8 62 6.20914 62 4Z" fill="#245D51" />
-                        <path d="M88 4C88 1.79086 85.7614 9.03621e-08 83 5.82124e-08C80.2386 2.60626e-08 78 1.79086 78 4C78 6.20914 80.2386 8 83 8C85.7614 8 88 6.20914 88 4Z" fill="#245D51" />
-                        <path d="M115 4C115 1.79086 112.985 8.13259e-08 110.5 5.23911e-08C108.015 2.34563e-08 106 1.79086 106 4C106 6.20914 108.015 8 110.5 8C112.985 8 115 6.20914 115 4Z" fill="#245D51" />
-                        <path d="M141 4C141 1.79086 138.985 8.13259e-08 136.5 5.23911e-08C134.015 2.34563e-08 132 1.79086 132 4C132 6.20914 134.015 8 136.5 8C138.985 8 141 6.20914 141 4Z" fill="#245D51" />
-                    </svg>
+        <section className="hero-section relative overflow-hidden pt-20">
+            {/* Ultra-Premium Background Elements */}
+            <div className="absolute inset-0 overflow-hidden">
+                {/* Interactive Mouse Following Gradient */}
+                <div
+                    className="absolute inset-0 opacity-8 transition-all duration-1000"
+                    style={{
+                        background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 146, 87, 0.15) 0%, transparent 60%)`
+                    }}
+                />
+
+                {/* Floating Geometric Shapes */}
+                <div className="absolute top-20 right-20 w-80 h-80 bg-gradient-to-br from-[#FF9257] to-[#EC651B] rounded-full opacity-8 animate-float blur-sm" />
+                <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-gradient-to-br from-[#FF9257]/20 to-[#EC651B]/20 rounded-full opacity-10 animate-float" style={{ animationDelay: '2s' }} />
+
+                {/* Premium Grid Pattern */}
+                <div className="absolute inset-0 opacity-5">
+                    <div className="absolute inset-0" style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF9257' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                    }} />
                 </div>
-                <ImageDisplay src='/Bg2.png' className='md:mt-[4em] mt-[1em] rounded-[2em] ' alt='Background Image 2' width={400} />
+
+                {/* Luxury Accent Lines */}
+                <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#FF9257]/30 to-transparent" />
+                <div className="absolute bottom-1/4 right-0 w-full h-px bg-gradient-to-l from-transparent via-[#EC651B]/30 to-transparent" />
             </div>
-            <ButtonDisplay text='Grab Ur Seat Today' px='px-[0.5em]' py='py-[1em] md:hidden w-[15em] z-10 ' onclick="Contact Us" />
-        </div>
+
+            <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
+                <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center min-h-[75vh] py-6 lg:py-8">
+                    {/* Left Content */}
+                    <div className={`space-y-6 ${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
+
+                        {/* Main Heading */}
+                        <div className="space-y-5">
+                            <h1 className="text-[#002448] leading-tight">
+                                <span className="block text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">
+                                    Study MBBS & Nursing in
+                                </span>
+                                <span className="block min-h-[60px] sm:min-h-[70px] lg:min-h-[80px] flex items-center">
+                                    <span className="gradient-text text-3xl sm:text-4xl lg:text-5xl font-bold">
+                                        <TypewriterText
+                                            texts={['Georgia', 'Uzbekistan', 'Russia', 'Eastern Europe']}
+                                            speed={150}
+                                            deleteSpeed={75}
+                                            pauseTime={2500}
+                                        />
+                                    </span>
+                                </span>
+                            </h1>
+
+                            <p className="text-lg sm:text-xl text-[#64748B] max-w-2xl leading-relaxed">
+                                Specialized in MBBS, Nursing, and medical courses in Georgia, Uzbekistan, and Russia.
+                                From application to graduation, we guide you every step of the way to
+                                achieve your medical career dreams at top universities in Eastern Europe.
+                            </p>
+                        </div>
+
+
+                        {/* CTA Buttons */}
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <ButtonDisplay
+                                text="Start Your Journey"
+                                px="px-8 py-4"
+                                onclick="Contact Us"
+                            />
+                            <button className="btn-secondary">
+                                Watch Our Story
+                            </button>
+                        </div>
+
+                        {/* Trust Indicators */}
+                        <div className="pt-8 border-t border-[#E2E8F0]">
+                            <p className="text-sm text-[#64748B] mb-4">Trusted by leading universities worldwide</p>
+                            <div className="flex items-center space-x-8 opacity-60">
+                                <div className="text-sm font-medium">Harvard</div>
+                                <div className="text-sm font-medium">MIT</div>
+                                <div className="text-sm font-medium">Oxford</div>
+                                <div className="text-sm font-medium">Stanford</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Content - Premium Image Showcase */}
+                    <div className={`relative flex justify-end items-center ${isVisible ? 'animate-fade-in-right' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
+                        <div className="relative w-full max-w-2xl group -mr-4 sm:-mr-8 lg:-mr-12 xl:-mr-16">
+                            {/* Main Image Container */}
+                            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl group-hover:shadow-3xl transition-all duration-500 hover:scale-105">
+                                <ImageDisplay
+                                    src="/Bg1.png"
+                                    className="w-full h-96 sm:h-[28rem] lg:h-[32rem] object-cover transition-transform duration-500 group-hover:scale-110"
+                                    alt="International students at prestigious university"
+                                    width={600}
+                                    height={500}
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                                <div className="absolute bottom-6 left-6 text-white">
+                                    <h3 className="text-xl font-semibold mb-2">Harvard University</h3>
+                                    <p className="text-sm opacity-90">Cambridge, Massachusetts</p>
+                                </div>
+
+                                {/* Interactive Hover Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-[#FF9257]/20 to-[#EC651B]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                                    <div className="text-white text-center">
+                                        <div className="text-2xl font-bold mb-2">🎓</div>
+                                        <div className="text-sm font-medium">Click to Learn More</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Scholarship Badge */}
+                            <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 z-20">
+                                <div className="bg-white rounded-2xl p-3 sm:p-4 shadow-xl border border-[#FF9257]/20 w-44 sm:w-52 hover:scale-110 hover:shadow-2xl transition-all duration-300 cursor-pointer group">
+                                    <div className="flex items-center space-x-2 sm:space-x-3">
+                                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-[#FF9257] to-[#EC651B] rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
+                                            <span className="text-white font-bold text-lg sm:text-xl">🎓</span>
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold text-xs sm:text-sm text-[#002448]">Scholarship Awarded</div>
+                                            <div className="text-xs text-[#64748B]">$50,000/year</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            {/* Interactive Decorative Elements */}
+                            <div className="absolute top-1/2 -left-6 sm:-left-8 w-12 h-12 sm:w-16 sm:h-16 bg-[#FF9257] rounded-full opacity-20 animate-float hover:opacity-40 hover:scale-110 transition-all duration-300 cursor-pointer" />
+                            <div className="absolute bottom-1/4 -right-6 sm:-right-8 w-10 h-10 sm:w-12 sm:h-12 bg-[#EC651B] rounded-full opacity-20 animate-pulse-slow hover:opacity-40 hover:scale-110 transition-all duration-300 cursor-pointer" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Scroll Indicator */}
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
+                <div className="w-6 h-10 border-2 border-[#FF9257] rounded-full flex justify-center">
+                    <div className="w-1 h-3 bg-[#FF9257] rounded-full mt-2 animate-pulse"></div>
+                </div>
+            </div>
+        </section>
     );
 }
-

@@ -1,214 +1,199 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import Headers from './../Headers';
+import { useState, useEffect } from 'react';
 
-interface Testimonial {
-    id: number;
-    name: string;
-    role: string;
-    content: string;
-    avatar: string;
-}
+export default function PremiumTestimonialsSection() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
-const testimonials: Testimonial[] = [
-    {
-        id: 1,
-        name: "Mohh Jumah",
-        role: "Senior Developer",
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur ac blandit nam massa massa elementum mollis lectus. Sit ultrices nisl amet non, quis enim velit tempus. Interdum duis imperdiet venenatis",
-        avatar: "https://imgs.search.brave.com/unTidX37-QLkjXuD7yiK6NDCe1kEpvvtM4dZ35paIPU/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTQ5/NTA4ODA0My9mci92/ZWN0b3JpZWwvaWMl/QzMlQjRuZS1kZS1w/cm9maWwtdXRpbGlz/YXRldXItYXZhdGFy/LW91LWljJUMzJUI0/bmUtZGUtcGVyc29u/bmUtcGhvdG8tZGUt/cHJvZmlsLXN5bWJv/bGUtcG9ydHJhaXQu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PW1vTlJaall0VnBI/LUkwbUFlLVpmalZr/dXdnQ09xSC1CUlhG/TGhRa1pvUDg9"
-    },
-    {
-        id: 2,
-        name: "John Mark",
-        role: "Data Analyst",
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur ac blandit nam massa massa elementum mollis lectus. Sit ultrices nisl amet non, quis enim velit tempus. Interdum duis imperdiet",
-        avatar: "https://imgs.search.brave.com/unTidX37-QLkjXuD7yiK6NDCe1kEpvvtM4dZ35paIPU/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTQ5/NTA4ODA0My9mci92/ZWN0b3JpZWwvaWMl/QzMlQjRuZS1kZS1w/cm9maWwtdXRpbGlz/YXRldXItYXZhdGFy/LW91LWljJUMzJUI0/bmUtZGUtcGVyc29u/bmUtcGhvdG8tZGUt/cHJvZmlsLXN5bWJv/bGUtcG9ydHJhaXQu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PW1vTlJaall0VnBI/LUkwbUFlLVpmalZr/dXdnQ09xSC1CUlhG/TGhRa1pvUDg9"
-    },
-    {
-        id: 3,
-        name: "Sarah Wilson",
-        role: "UX Designer",
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur ac blandit nam massa massa elementum mollis lectus. Sit ultrices nisl amet non, quis enim velit tempus.",
-        avatar: "https://imgs.search.brave.com/unTidX37-QLkjXuD7yiK6NDCe1kEpvvtM4dZ35paIPU/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTQ5/NTA4ODA0My9mci92/ZWN0b3JpZWwvaWMl/QzMlQjRuZS1kZS1w/cm9maWwtdXRpbGlz/YXRldXItYXZhdGFy/LW91LWljJUMzJUI0/bmUtZGUtcGVyc29u/bmUtcGhvdG8tZGUt/cHJvZmlsLXN5bWJv/bGUtcG9ydHJhaXQu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PW1vTlJaall0VnBI/LUkwbUFlLVpmalZr/dXdnQ09xSC1CUlhG/TGhRa1pvUDg9"
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const element = document.getElementById('testimonials');
+    if (element) {
+      observer.observe(element);
     }
-];
 
-const TestimonialsSection: React.FC = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [shownTestimonials, setShownTestimonials] = useState<Set<number>>(new Set([0]));
+    return () => observer.disconnect();
+  }, []);
 
-    const nextTestimonial = () => {
-        setCurrentIndex((prevIndex) => {
-            const nextIndex = prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1;
-            return nextIndex;
-        });
-    };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
 
-    const prevTestimonial = () => {
-        setCurrentIndex((prevIndex) => {
-            const nextIndex = prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1;
-            return nextIndex;
-        });
-    };
+    return () => clearInterval(interval);
+  }, []);
 
-    const goToSlide = (index: number) => {
-        setCurrentIndex(index);
-        setShownTestimonials(prev => new Set([...prev, index]));
-    };
+  const testimonials = [
+  {
+    id: 1,
+      name: "Sarah Johnson",
+      role: "Computer Science Graduate",
+      university: "MIT",
+      country: "USA",
+      image: "/Bg1.png",
+      rating: 5,
+      text: "Edufy transformed my dream of studying at MIT into reality. Their guidance throughout the application process was exceptional, and I couldn't have done it without their support.",
+      achievement: "Full Scholarship Recipient"
+  },
+  {
+    id: 2,
+      name: "Ahmed Hassan",
+      role: "MBA Graduate",
+      university: "Harvard Business School",
+      country: "USA",
+      image: "/Bg2.png",
+      rating: 5,
+      text: "The team at Edufy made my Harvard MBA journey seamless. From application to visa, they handled everything with professionalism and care.",
+      achievement: "Dean's List Student"
+  },
+  {
+    id: 3,
+      name: "Priya Patel",
+      role: "Medical Student",
+      university: "Oxford University",
+      country: "UK",
+      image: "/Bg1.png",
+      rating: 5,
+      text: "Studying medicine at Oxford was my lifelong dream. Edufy's expertise in UK applications made it possible. I'm forever grateful for their support.",
+      achievement: "Rhodes Scholar"
+    },
+    {
+      id: 4,
+      name: "David Chen",
+      role: "Engineering Graduate",
+      university: "Stanford University",
+      country: "USA",
+      image: "/Bg2.png",
+      rating: 5,
+      text: "Edufy's personalized approach helped me secure admission to Stanford with a full scholarship. Their attention to detail is unmatched.",
+      achievement: "Research Fellowship"
+    }
+  ];
 
-    const getNextUniqueIndex = (currentIdx: number) => {
-        // If all testimonials have been shown, reset and start over
-        if (shownTestimonials.size >= testimonials.length) {
-            setShownTestimonials(new Set([0]));
-            return 0;
-        }
+  return (
+    <section id="testimonials" className="section-padding bg-gradient-to-br from-[#F8FAFC] to-[#E2E8F0]">
+      <div className="container">
+        <div className={`text-center space-y-6 mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-[#FF9257]/20 text-[#FF9257] font-medium text-sm">
+            <span className="w-2 h-2 bg-[#FF9257] rounded-full mr-2 animate-pulse"></span>
+            Success Stories
+          </div>
 
-        // Find next unshown testimonial
-        for (let i = 1; i <= testimonials.length; i++) {
-            const nextIdx = (currentIdx + i) % testimonials.length;
-            if (!shownTestimonials.has(nextIdx)) {
-                return nextIdx;
-            }
-        }
+          <h2 className="heading-lg text-[#002448]">
+            What Our <span className="gradient-text">Students Say</span>
+          </h2>
 
-        // Fallback (shouldn't reach here)
-        return (currentIdx + 1) % testimonials.length;
-    };
+          <p className="text-body max-w-2xl mx-auto">
+            Hear from our successful students who have achieved their dreams
+            of studying at the world's most prestigious universities.
+          </p>
+        </div>
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            const nextIndex = getNextUniqueIndex(currentIndex);
-            setCurrentIndex(nextIndex);
-            setShownTestimonials(prev => new Set([...prev, nextIndex]));
-        }, 5000);
-
-        return () => clearTimeout(timer);
-    }, [currentIndex, shownTestimonials]);
-
-    return (
-        <section className="py-8 md:py-16 px-4 bg-gray-50">
-            <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-8 md:mb-12">
-                    <Headers text='Reviews' />
-                    <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-gray-900 mb-4 px-2">
-                        What Our{' '}<span className="text-orange-500">Students</span>{' '}Say About Us
-                    </h2>
+        {/* Premium Testimonial Carousel */}
+        <div className={`relative ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
+          <div className="card-premium p-8 max-w-4xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
+              {/* Testimonial Content */}
+              <div className="space-y-6">
+                <div className="flex items-center space-x-1">
+                  {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 text-[#FF9257]" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
                 </div>
 
-                <div className="relative">
-                    {/* Desktop Navigation Buttons */}
-                    <button
-                        onClick={prevTestimonial}
-                        className="hidden md:flex absolute top-1/2 -left-16 -translate-y-1/2 z-20 w-14 h-14 bg-white rounded-full shadow-xl border border-gray-100 items-center justify-center hover:shadow-2xl hover:scale-105 hover:bg-orange-50 transition-all duration-300 group"
-                        aria-label="Previous testimonial"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" className="group-hover:scale-110 transition-transform duration-200">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="2" d="M15 19.92L8.48 13.4c-.77-.77-.77-2.03 0-2.8L15 4.08" className="text-gray-700 group-hover:text-orange-500"></path>
-                        </svg>
-                    </button>
-                    <button
-                        onClick={nextTestimonial}
-                        className="hidden md:flex absolute -right-16 top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white rounded-full shadow-xl border border-gray-100 items-center justify-center hover:shadow-2xl hover:scale-105 hover:bg-orange-50 transition-all duration-300 group"
-                        aria-label="Next testimonial"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" className="group-hover:scale-110 transition-transform duration-200">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="2" d="M8.91 19.92l6.52-6.52c.77-.77.77-2.03 0-2.8L8.91 4.08" className="text-gray-700 group-hover:text-orange-500"></path>
-                        </svg>
-                    </button>
+                <blockquote className="text-xl text-[#002448] font-medium leading-relaxed">
+                  "{testimonials[currentTestimonial].text}"
+                </blockquote>
 
-                    {/* Testimonials Container */}
-                    <div className="overflow-hidden">
-                        <div
-                            className="flex transition-transform duration-500 ease-in-out mb-1"
-                            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-                        >
-                            {testimonials.map((testimonial) => (
-                                <div key={testimonial.id} className="w-full flex-shrink-0 px-2 md:px-4">
-                                    {/* Mobile: Single Column, Desktop: Two Columns */}
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-                                        {/* Current Testimonial */}
-                                        <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-200">
-                                            <div className="flex items-center mb-4 md:mb-6">
-                                                <img
-                                                    src={testimonial.avatar}
-                                                    alt={testimonial.name}
-                                                    className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover mr-3 md:mr-4"
-                                                />
-                                                <div>
-                                                    <h3 className="font-semibold text-gray-900 text-base md:text-lg">{testimonial.name}</h3>
-                                                    <p className="text-orange-500 text-xs md:text-sm font-medium">{testimonial.role}</p>
-                                                </div>
-                                            </div>
-                                            <p className="text-gray-600 leading-relaxed text-sm md:text-base">{testimonial.content}</p>
-                                        </div>
-
-                                        {/* Second Testimonial (Desktop Only) */}
-                                        <div className="hidden md:block bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-200">
-                                            <div className="flex items-center mb-6">
-                                                <img
-                                                    src={testimonials[(currentIndex + 1) % testimonials.length].avatar}
-                                                    alt={testimonials[(currentIndex + 1) % testimonials.length].name}
-                                                    className="w-14 h-14 rounded-full object-cover mr-4"
-                                                />
-                                                <div>
-                                                    <h3 className="font-semibold text-gray-900 text-lg">
-                                                        {testimonials[(currentIndex + 1) % testimonials.length].name}
-                                                    </h3>
-                                                    <p className="text-orange-500 text-sm font-medium">
-                                                        {testimonials[(currentIndex + 1) % testimonials.length].role}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <p className="text-gray-600 leading-relaxed">
-                                                {testimonials[(currentIndex + 1) % testimonials.length].content}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#FF9257] to-[#EC651B] rounded-full flex items-center justify-center text-white font-bold">
+                      {testimonials[currentTestimonial].name.split(' ').map(n => n[0]).join('')}
                     </div>
-
-                    {/* Mobile Navigation Buttons */}
-                    <div className="flex mt-6 justify-between md:justify-center items-center px-[1em] space-x-4">
-                        <div className="flex md:hidden justify-center mt-6 space-x-4">
-                            <button
-                                onClick={prevTestimonial}
-                                className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow duration-200"
-                                aria-label="Previous testimonial"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                    <path stroke="#000" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="1.5" d="M15 19.92L8.48 13.4c-.77-.77-.77-2.03 0-2.8L15 4.08"></path>
-                                </svg>
-                            </button>
-                            <button
-                                onClick={nextTestimonial}
-                                className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow duration-200"
-                                aria-label="Next testimonial"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                    <path stroke="#000" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="1.5" d="M8.91 19.92l6.52-6.52c.77-.77.77-2.03 0-2.8L8.91 4.08"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div className="flex justify-center mt-6 md:mt-8 space-x-2">
-                            {testimonials.map((_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => goToSlide(index)}
-                                    className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-colors duration-200 ${index === currentIndex ? 'bg-orange-500' : 'bg-gray-300 hover:bg-gray-400'
-                                        }`}
-                                    aria-label={`Go to testimonial ${index + 1}`}
-                                />
-                            ))}
-                        </div>
+                    <div>
+                      <h4 className="font-semibold text-[#002448]">{testimonials[currentTestimonial].name}</h4>
+                      <p className="text-sm text-[#64748B]">{testimonials[currentTestimonial].role}</p>
                     </div>
+        </div>
+
+                  <div className="flex items-center space-x-4 text-sm">
+                    <div className="flex items-center space-x-2">
+                      <span className="w-2 h-2 bg-[#FF9257] rounded-full"></span>
+                      <span className="text-[#64748B]">{testimonials[currentTestimonial].university}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className="w-2 h-2 bg-[#EC651B] rounded-full"></span>
+                      <span className="text-[#64748B]">{testimonials[currentTestimonial].country}</span>
+                        </div>
+                      </div>
+
+                  <div className="inline-flex items-center px-3 py-1 bg-[#FF9257]/10 rounded-full text-[#FF9257] text-sm font-medium">
+                    🏆 {testimonials[currentTestimonial].achievement}
+                    </div>
+                        </div>
+                      </div>
+
+              {/* University Showcase */}
+              <div className="relative">
+                <div className="card-premium p-6 bg-gradient-to-br from-[#FF9257]/5 to-[#EC651B]/5">
+                  <div className="text-center space-y-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#FF9257] to-[#EC651B] rounded-full mx-auto flex items-center justify-center text-white text-2xl font-bold">
+                      {testimonials[currentTestimonial].university.split(' ').map(w => w[0]).join('')}
+                    </div>
+                    <h3 className="heading-sm text-[#002448]">{testimonials[currentTestimonial].university}</h3>
+                    <p className="text-[#64748B]">{testimonials[currentTestimonial].country}</p>
+                    <div className="flex justify-center space-x-2">
+                      <div className="w-2 h-2 bg-[#FF9257] rounded-full animate-pulse"></div>
+                      <div className="w-2 h-2 bg-[#EC651B] rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                      <div className="w-2 h-2 bg-[#002448] rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                    </div>
+                  </div>
                 </div>
             </div>
-        </section>
-    );
-};
+          </div>
+            </div>
 
-export default TestimonialsSection;
+          {/* Navigation Dots */}
+          <div className="flex justify-center space-x-2 mt-8">
+            {testimonials.map((_, index) => (
+                <button
+                key={index}
+                onClick={() => setCurrentTestimonial(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentTestimonial
+                  ? 'bg-[#FF9257] scale-125'
+                  : 'bg-[#E2E8F0] hover:bg-[#FF9257]/50'
+                  }`}
+                />
+              ))}
+          </div>
+        </div>
+
+        {/* Trust Indicators */}
+        <div className={`mt-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.6s' }}>
+          <div className="text-center space-y-4">
+            <p className="text-sm text-[#64748B] font-medium">Trusted by students from</p>
+            <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
+              <div className="text-sm font-semibold text-[#002448]">🇺🇸 United States</div>
+              <div className="text-sm font-semibold text-[#002448]">🇬🇧 United Kingdom</div>
+              <div className="text-sm font-semibold text-[#002448]">🇨🇦 Canada</div>
+              <div className="text-sm font-semibold text-[#002448]">🇦🇺 Australia</div>
+              <div className="text-sm font-semibold text-[#002448]">🇩🇪 Germany</div>
+              <div className="text-sm font-semibold text-[#002448]">🇫🇷 France</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

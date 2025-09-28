@@ -1,26 +1,77 @@
+'use client';
+
 import Image from "next/image";
 import NavBar from './../components/Links/NavBar';
 import HomePage from "@/components/Home/HomePage";
 import HomeAbout from "@/components/Home/About";
-import TestimonialsSection from "@/components/Home/Testimonials";
 import OpportunityCard from './../components/Home/OpportunityCard';
 import Footer from './../components/Links/Footer';
+import HomeCourses from "@/components/Home/Courses";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import Steps from "@/components/Home/Steps";
+import ScrollToTop from "@/components/ScrollToTop";
+import ParticleBackground from "@/components/ParticleBackground";
+import ProgressIndicator from "@/components/ProgressIndicator";
+import PremiumTestimonialsSection from "@/components/Home/Testimonials";
+import StatsSection from "@/components/Home/Stats";
+import CTASection from "@/components/Home/CTASection";
 
 export default function Home() {
   return (
-    <div className="font-[family-name:var(--font-montserrat)]">
+    <div className="font-[family-name:var(--font-montserrat)] relative">
+      <ProgressIndicator />
+      <ParticleBackground />
       <NavBar />
-      <HomePage />
-      <HomeAbout />
-      <TestimonialsSection />
+      <section id="home">
+        <HomePage />
+      </section>
+      <section id="about">
+        <HomeAbout />
+      </section>
+      <section id="course">
+        <HomeCourses />
+      </section>
+      <StatsSection />
+      <PremiumTestimonialsSection />
+      <CTASection />
+      <Steps />
       <OpportunityCard />
       <Footer />
-      <div className='fixed absolute bottom-[1em] right-[1em] '>
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="40" cy="40" r="40" fill="#38B000" fill-opacity="0.8" />
-          <path d="M52.191 27.8016C50.6704 26.2739 48.8595 25.0625 46.8637 24.2382C44.8679 23.4138 42.7272 22.993 40.5663 23.0001C31.5121 23.0001 24.1327 30.3426 24.1327 39.3515C24.1327 42.239 24.8955 45.044 26.3216 47.519L24 56L32.706 53.723C35.1106 55.0265 37.8136 55.7195 40.5663 55.7195C49.6206 55.7195 57 48.377 57 39.368C57 34.9956 55.292 30.8871 52.191 27.8016ZM40.5663 52.9475C38.1121 52.9475 35.7075 52.2875 33.6015 51.05L33.104 50.753L27.9302 52.106L29.3065 47.09L28.9749 46.5785C27.611 44.4122 26.887 41.9078 26.8854 39.3515C26.8854 31.8606 33.0211 25.7556 40.5497 25.7556C44.198 25.7556 47.6307 27.1746 50.201 29.7486C51.4739 31.0089 52.4827 32.5083 53.1687 34.1596C53.8548 35.8108 54.2044 37.5812 54.1975 39.368C54.2307 46.859 48.095 52.9475 40.5663 52.9475ZM48.0618 42.7835C47.6472 42.5855 45.6241 41.5955 45.2593 41.447C44.8779 41.315 44.6126 41.249 44.3307 41.645C44.0487 42.0575 43.2693 42.9815 43.0372 43.2455C42.805 43.526 42.5563 43.559 42.1417 43.3445C41.7271 43.1465 40.4005 42.701 38.8417 41.315C37.6146 40.226 36.802 38.8895 36.5533 38.477C36.3211 38.0645 36.5201 37.85 36.7357 37.6356C36.9181 37.4541 37.1503 37.1571 37.3492 36.9261C37.5482 36.6951 37.6312 36.5136 37.7638 36.2496C37.8965 35.9691 37.8301 35.7381 37.7307 35.5401C37.6312 35.3421 36.802 33.3291 36.4704 32.5041C36.1387 31.7121 35.7905 31.8111 35.5417 31.7946H34.7457C34.4638 31.7946 34.0327 31.8936 33.6513 32.3061C33.2864 32.7186 32.2251 33.7086 32.2251 35.7216C32.2251 37.7345 33.701 39.6815 33.9 39.9455C34.099 40.226 36.802 44.351 40.9146 46.1165C41.893 46.5455 42.6558 46.793 43.2528 46.9745C44.2312 47.288 45.1266 47.2385 45.8397 47.1395C46.6357 47.024 48.2774 46.1495 48.609 45.1925C48.9573 44.2355 48.9573 43.427 48.8412 43.2455C48.7251 43.064 48.4764 42.9815 48.0618 42.7835Z" fill="white" />
-        </svg>
+
+      {/* Premium Floating Contact */}
+      <div className="fixed z-50 flex flex-col gap-4 bottom-6 right-6 items-end animate-fade-in-up" style={{ animationDelay: '1.5s' }}>
+        {/* WhatsApp */}
+        <button
+          aria-label="WhatsApp Contact"
+          className="w-14 h-14 flex items-center justify-center rounded-full hover-lift hover-scale transition-all duration-300 group relative overflow-hidden shadow-lg"
+          onClick={() => window.open('https://wa.me/1234567890', '_blank')}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#38B000] to-[#25D366] rounded-full"></div>
+          <div className="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="relative z-10">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.214-.372a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" fill="white" />
+          </svg>
+          <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold animate-pulse">
+            !
+          </div>
+        </button>
+
+        {/* Instagram */}
+        <button
+          aria-label="Instagram"
+          className="w-14 h-14 flex items-center justify-center rounded-full hover-lift hover-scale transition-all duration-300 group relative overflow-hidden shadow-lg"
+          onClick={() => window.open('https://instagram.com/edufy', '_blank')}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#C13584] via-[#E1306C] to-[#F56040] rounded-full"></div>
+          <div className="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="relative z-10">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="white" />
+          </svg>
+        </button>
       </div>
+
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
     </div>
   );
 }
