@@ -2,6 +2,7 @@
   "name": "edufy",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://edufyoverseas.co.in",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
