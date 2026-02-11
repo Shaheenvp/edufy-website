@@ -39,7 +39,7 @@ export default function FloatingActionGroup() {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => window.open('https://wa.me/919999999999', '_blank')}
+              onClick={() => window.open('https://wa.me/919400343442', '_blank')}
               className="w-12 h-12 bg-gradient-to-r from-[#38B000] to-[#25D366] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden"
               aria-label="WhatsApp Contact"
             >
@@ -56,7 +56,7 @@ export default function FloatingActionGroup() {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => window.open('https://instagram.com/edufyoverseas', '_blank')}
+              onClick={() => window.open('https://www.instagram.com/edufy_overseas?igsh=MXhuN3JrM2M0bzB2ZQ==', '_blank')}
               className="w-12 h-12 bg-gradient-to-r from-[#C13584] via-[#E1306C] to-[#F56040] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden"
               aria-label="Instagram"
             >
@@ -101,15 +101,14 @@ export default function FloatingActionGroup() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsExpanded(!isExpanded)}
-        className={`w-16 h-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden ${
-          isExpanded 
-            ? 'bg-gradient-to-r from-[#FF9257] to-[#EC651B]' 
+        className={`w-16 h-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden ${isExpanded
+            ? 'bg-gradient-to-r from-[#FF9257] to-[#EC651B]'
             : 'bg-gradient-to-r from-[#002448] to-[#1a365d]'
-        }`}
+          }`}
         aria-label={isExpanded ? "Close menu" : "Open contact menu"}
       >
         <div className="absolute inset-0 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        
+
         {/* Animated Icon */}
         <motion.div
           animate={{ rotate: isExpanded ? 45 : 0 }}

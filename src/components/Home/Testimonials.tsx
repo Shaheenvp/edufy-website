@@ -1,28 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import { useGsapReveal } from '@/helpers/useGsapReveal';
 
 export default function PremiumTestimonialsSection() {
-  const [isVisible, setIsVisible] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const element = document.getElementById('testimonials');
-    if (element) {
-      observer.observe(element);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useRef<HTMLElement>(null);
+  useGsapReveal(sectionRef, { selector: '[data-reveal]', stagger: 0.08 });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,54 +19,54 @@ export default function PremiumTestimonialsSection() {
   const testimonials = [
     {
       id: 1,
-      name: "Sarah Johnson",
-      role: "Computer Science Graduate",
-      university: "MIT",
-      country: "USA",
+      name: "Aisha Khan",
+      role: "MBBS Student",
+      university: "Tbilisi State Medical University",
+      country: "Georgia",
       image: "/Bg1.png",
       rating: 5,
-      text: "Edufy transformed my dream of studying at MIT into reality. Their guidance throughout the application process was exceptional, and I couldn't have done it without their support.",
-      achievement: "Full Scholarship Recipient"
+      text: "Edufy made my MBBS journey in Georgia smooth and stress-free. From university selection to documentation, they guided me at every step.",
+      achievement: "Admission Secured"
     },
     {
       id: 2,
-      name: "Ahmed Hassan",
-      role: "MBA Graduate",
-      university: "Harvard Business School",
-      country: "USA",
+      name: "Rahul Sharma",
+      role: "Nursing Student",
+      university: "Tashkent Medical Academy",
+      country: "Uzbekistan",
       image: "/Bg2.png",
       rating: 5,
-      text: "The team at Edufy made my Harvard MBA journey seamless. From application to visa, they handled everything with professionalism and care.",
-      achievement: "Dean's List Student"
+      text: "The team helped me choose the right Nursing program and handled my application end-to-end. Their support before and after arrival was excellent.",
+      achievement: "Visa Approved"
     },
     {
       id: 3,
-      name: "Priya Patel",
+      name: "Fatima Noor",
       role: "Medical Student",
-      university: "Oxford University",
-      country: "UK",
+      university: "Charité - Universitätsmedizin Berlin",
+      country: "Germany",
       image: "/Bg1.png",
       rating: 5,
-      text: "Studying medicine at Oxford was my lifelong dream. Edufy's expertise in UK applications made it possible. I'm forever grateful for their support.",
-      achievement: "Rhodes Scholar"
+      text: "I got clarity on requirements and timelines, and Edufy helped me stay on track. Their counseling made the process organized and confident.",
+      achievement: "Offer Letter Received"
     },
     {
       id: 4,
-      name: "David Chen",
-      role: "Engineering Graduate",
-      university: "Stanford University",
-      country: "USA",
+      name: "Omar Ali",
+      role: "MBBS Student",
+      university: "Sechenov University",
+      country: "Russia",
       image: "/Bg2.png",
       rating: 5,
-      text: "Edufy's personalized approach helped me secure admission to Stanford with a full scholarship. Their attention to detail is unmatched.",
-      achievement: "Research Fellowship"
+      text: "From shortlisting universities to preparing documents, Edufy supported me throughout. I’m grateful for the guidance and quick responses.",
+      achievement: "University Enrollment Completed"
     }
   ];
 
   return (
-    <section id="testimonials" className="section-padding bg-gradient-to-br from-[#F8FAFC] to-[#E2E8F0]">
+    <section ref={sectionRef} id="testimonials" className="section-padding bg-gradient-to-br from-[#F8FAFC] to-[#E2E8F0]">
       <div className="container">
-        <div className={`text-center space-y-6 mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+        <div data-reveal className="text-center space-y-6 mb-16">
           <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-[#FF9257]/20 text-[#FF9257] font-medium text-sm">
             <span className="w-2 h-2 bg-[#FF9257] rounded-full mr-2 animate-pulse"></span>
             Success Stories
@@ -94,12 +78,12 @@ export default function PremiumTestimonialsSection() {
 
           <p className="text-body max-w-2xl mx-auto">
             Hear from our successful students who have achieved their dreams
-            of studying at the world's most prestigious universities.
+            of studying MBBS and Nursing at trusted universities abroad.
           </p>
         </div>
 
         {/* Premium Testimonial Carousel */}
-        <div className={`relative ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
+        <div data-reveal className="relative">
           <div className="card-premium p-8 max-w-4xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-8 items-center">
               {/* Testimonial Content */}
@@ -180,16 +164,15 @@ export default function PremiumTestimonialsSection() {
         </div>
 
         {/* Trust Indicators */}
-        <div className={`mt-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.6s' }}>
+        <div data-reveal className="mt-16">
           <div className="text-center space-y-4">
             <p className="text-sm text-[#64748B] font-medium">Trusted by students from</p>
             <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-              <div className="text-sm font-semibold text-[#002448]">🇺🇸 United States</div>
-              <div className="text-sm font-semibold text-[#002448]">🇬🇧 United Kingdom</div>
-              <div className="text-sm font-semibold text-[#002448]">🇨🇦 Canada</div>
-              <div className="text-sm font-semibold text-[#002448]">🇦🇺 Australia</div>
+              <div className="text-sm font-semibold text-[#002448]">🇬🇪 Georgia</div>
+              <div className="text-sm font-semibold text-[#002448]">🇺🇿 Uzbekistan</div>
               <div className="text-sm font-semibold text-[#002448]">🇩🇪 Germany</div>
-              <div className="text-sm font-semibold text-[#002448]">🇫🇷 France</div>
+              <div className="text-sm font-semibold text-[#002448]">🇷🇺 Russia</div>
+              <div className="text-sm font-semibold text-[#002448]">Eurasian countries</div>
             </div>
           </div>
         </div>

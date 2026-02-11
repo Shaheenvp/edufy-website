@@ -2,19 +2,21 @@
 
 import { useEffect, useRef } from 'react';
 
-interface Particle {
+interface Orb {
     x: number;
     y: number;
     vx: number;
     vy: number;
     size: number;
     opacity: number;
+    hue: number;
 }
 
 export default function ParticleBackground() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const particlesRef = useRef<Particle[]>([]);
+    const orbsRef = useRef<Orb[]>([]);
     const animationRef = useRef<number | null>(null);
+    const timeRef = useRef<number>(0);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -28,72 +30,95 @@ export default function ParticleBackground() {
             canvas.height = window.innerHeight;
         };
 
-        const createParticles = () => {
-            const particles: Particle[] = [];
-            const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
+        const createOrbs = () => {
+            const orbs: Orb[] = [];
+            // Fewer orbs for a cleaner look
+            const orbCount = 8;
 
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
+            for (let i = 0; i < orbCount; i++) {
+                orbs.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
-                    size: Math.random() * 2 + 1,
-                    opacity: Math.random() * 0.5 + 0.1
+                    // Much slower movement
+                    vx: (Math.random() - 0.5) * 0.15,
+                    vy: (Math.random() - 0.5) * 0.15,
+                    // Larger, softer orbs
+                    size: Math.random() * 150 + 100,
+                    // Very subtle opacity
+                    opacity: Math.random() * 0.03 + 0.02,
+                    // Color variation between blue and orange theme
+                    hue: Math.random() > 0.5 ? 210 : 25 // Blue or Orange
                 });
             }
-            particlesRef.current = particles;
+            orbsRef.current = orbs;
         };
 
         const animate = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Subtle gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#f8fafc');
+            gradient.addColorStop(0.5, '#f1f5f9');
+            gradient.addColorStop(1, '#e2e8f0');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            particlesRef.current.forEach((particle, index) => {
-                particle.x += particle.vx;
-                particle.y += particle.vy;
+            timeRef.current += 0.005;
 
-                if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-                if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+            orbsRef.current.forEach((orb) => {
+                // Smooth, slow movement
+                orb.x += orb.vx;
+                orb.y += orb.vy;
 
+                // Gentle bounce at edges
+                if (orb.x < -orb.size || orb.x > canvas.width + orb.size) orb.vx *= -1;
+                if (orb.y < -orb.size || orb.y > canvas.height + orb.size) orb.vy *= -1;
+
+                // Create radial gradient for soft glow effect
+                const gradient = ctx.createRadialGradient(
+                    orb.x, orb.y, 0,
+                    orb.x, orb.y, orb.size
+                );
+
+                // Pulsing effect using sine wave
+                const pulse = Math.sin(timeRef.current + orb.x) * 0.01 + orb.opacity;
+
+                if (orb.hue === 210) {
+                    // Blue theme (matches #002448)
+                    gradient.addColorStop(0, `rgba(0, 36, 72, ${pulse * 1.5})`);
+                    gradient.addColorStop(0.5, `rgba(0, 36, 72, ${pulse * 0.5})`);
+                    gradient.addColorStop(1, 'rgba(0, 36, 72, 0)');
+                } else {
+                    // Orange theme (matches #FF9257)
+                    gradient.addColorStop(0, `rgba(255, 146, 87, ${pulse * 1.5})`);
+                    gradient.addColorStop(0.5, `rgba(255, 146, 87, ${pulse * 0.5})`);
+                    gradient.addColorStop(1, 'rgba(255, 146, 87, 0)');
+                }
+
+                ctx.fillStyle = gradient;
                 ctx.beginPath();
-                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 146, 87, ${particle.opacity})`;
+                ctx.arc(orb.x, orb.y, orb.size, 0, Math.PI * 2);
                 ctx.fill();
-
-                // Connect nearby particles
-                particlesRef.current.slice(index + 1).forEach(otherParticle => {
-                    const dx = particle.x - otherParticle.x;
-                    const dy = particle.y - otherParticle.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 100) {
-                        ctx.beginPath();
-                        ctx.moveTo(particle.x, particle.y);
-                        ctx.lineTo(otherParticle.x, otherParticle.y);
-                        ctx.strokeStyle = `rgba(255, 146, 87, ${0.1 * (1 - distance / 100)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                });
             });
 
             animationRef.current = requestAnimationFrame(animate);
         };
 
         resizeCanvas();
-        createParticles();
+        createOrbs();
         animate();
 
-        window.addEventListener('resize', () => {
+        const handleResize = () => {
             resizeCanvas();
-            createParticles();
-        });
+            createOrbs();
+        };
+
+        window.addEventListener('resize', handleResize);
 
         return () => {
             if (animationRef.current) {
                 cancelAnimationFrame(animationRef.current);
             }
-            window.removeEventListener('resize', resizeCanvas);
+            window.removeEventListener('resize', handleResize);
         };
     }, []);
 

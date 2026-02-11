@@ -1,29 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import ButtonDisplay from '../ButtonDisplay';
+import Link from 'next/link';
+import { programs } from '@/data/programs';
+import { useGsapReveal } from '@/helpers/useGsapReveal';
 
 export default function HomeCourses() {
-    const [isVisible, setIsVisible] = useState(false);
     const [activeCategory, setActiveCategory] = useState('all');
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                }
-            },
-            { threshold: 0.1 }
-        );
-
-        const element = document.getElementById('course');
-        if (element) {
-            observer.observe(element);
-        }
-
-        return () => observer.disconnect();
-    }, []);
+    const [activeCountry, setActiveCountry] = useState('all');
+    const sectionRef = useRef<HTMLElement>(null);
+    useGsapReveal(sectionRef, { selector: '[data-reveal]', stagger: 0.06 });
 
     const categories = [
         { id: 'all', label: 'All Programs' },
@@ -33,89 +20,23 @@ export default function HomeCourses() {
         { id: 'other', label: 'Other Courses' }
     ];
 
-    const courses = [
-        {
-            id: 1,
-            category: 'mbbs',
-            title: 'MBBS Program',
-            university: 'Tbilisi State Medical University',
-            country: 'Georgia',
-            duration: '6 Years',
-            tuition: '$8,000/year',
-            image: '/mbbs-georgia.jpg',
-            rating: 4.8,
-            students: 500
-        },
-        {
-            id: 2,
-            category: 'nursing',
-            title: 'Bachelor of Nursing',
-            university: 'Samarkand State Medical Institute',
-            country: 'Uzbekistan',
-            duration: '4 Years',
-            tuition: '$3,500/year',
-            image: '/nursing-uzbekistan.jpg',
-            rating: 4.7,
-            students: 300
-        },
-        {
-            id: 3,
-            category: 'mbbs',
-            title: 'MBBS Program',
-            university: 'Moscow Medical Academy',
-            country: 'Russia',
-            duration: '6 Years',
-            tuition: '$12,000/year',
-            image: '/mbbs-russia.jpg',
-            rating: 4.9,
-            students: 800
-        },
-        {
-            id: 4,
-            category: 'medical',
-            title: 'Dentistry Program',
-            university: 'Georgian American University',
-            country: 'Georgia',
-            duration: '5 Years',
-            tuition: '$10,000/year',
-            image: '/dentistry-georgia.jpg',
-            rating: 4.6,
-            students: 200
-        },
-        {
-            id: 5,
-            category: 'nursing',
-            title: 'Master of Nursing',
-            university: 'Tashkent Medical Academy',
-            country: 'Uzbekistan',
-            duration: '2 Years',
-            tuition: '$4,000/year',
-            image: '/nursing-masters.jpg',
-            rating: 4.7,
-            students: 150
-        },
-        {
-            id: 6,
-            category: 'phd',
-            title: 'Environmental Science',
-            university: 'Stanford University',
-            country: 'USA',
-            duration: '5 Years',
-            tuition: 'Fully Funded',
-            image: '/sustainability.jpg',
-            rating: 4.9,
-            students: 150
-        }
+    const countries = [
+        { id: 'all', label: 'All Countries' },
+        ...Array.from(new Set(programs.map((c) => c.country)))
+            .sort()
+            .map((country) => ({ id: country, label: country }))
     ];
 
-    const filteredCourses = activeCategory === 'all'
-        ? courses
-        : courses.filter(course => course.category === activeCategory);
+    const filteredCourses = programs.filter((course) => {
+        const matchesCategory = activeCategory === 'all' || course.category === activeCategory;
+        const matchesCountry = activeCountry === 'all' || course.country === activeCountry;
+        return matchesCategory && matchesCountry;
+    });
 
     return (
-        <section id="course" className="section-padding bg-white">
+        <section ref={sectionRef} id="course" className="section-padding bg-white">
             <div className="container">
-                <div className={`text-center space-y-6 mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+                <div data-reveal className="text-center space-y-6 mb-16">
                     <div className="inline-flex items-center px-4 py-2 bg-[#FF9257]/10 rounded-full text-[#FF9257] font-medium text-sm">
                         <span className="w-2 h-2 bg-[#FF9257] rounded-full mr-2 animate-pulse"></span>
                         Popular Programs
@@ -129,10 +50,17 @@ export default function HomeCourses() {
                         Discover world-class education opportunities across the globe.
                         From undergraduate to PhD programs, we have the perfect match for your academic goals.
                     </p>
+
+                    <div className="pt-2 flex justify-center">
+                        <Link href="/programs" className="btn-primary inline-flex items-center gap-2">
+                            View All Programs
+                            <span aria-hidden="true">→</span>
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Category Filter */}
-                <div className={`flex flex-wrap justify-center gap-4 mb-12 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
+                <div data-reveal className="flex flex-wrap justify-center gap-4 mb-12">
                     {categories.map((category) => (
                         <button
                             key={category.id}
@@ -147,13 +75,35 @@ export default function HomeCourses() {
                     ))}
                 </div>
 
+                {/* Country Filter */}
+                <div data-reveal className="flex flex-wrap justify-center gap-3 mb-12">
+                    {countries.map((country) => (
+                        <button
+                            key={country.id}
+                            onClick={() => setActiveCountry(country.id)}
+                            className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCountry === country.id
+                                ? 'bg-[#002448] text-white shadow-lg'
+                                : 'bg-white text-[#64748B] border border-[#E2E8F0] hover:border-[#002448] hover:text-[#002448]'
+                                }`}
+                        >
+                            {country.label}
+                        </button>
+                    ))}
+                </div>
+
                 {/* Courses Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredCourses.map((course, index) => (
                         <div
                             key={course.id}
-                            className={`card-premium hover-lift ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-                            style={{ animationDelay: `${index * 0.1}s` }}
+                            data-reveal
+                            className={`card-premium hover-lift ${
+                                index >= 2 ? 'hidden md:block' : ''
+                            } ${
+                                index >= 4 ? 'md:hidden lg:block' : ''
+                            } ${
+                                index >= 6 ? 'lg:hidden' : ''
+                            }`}
                         >
                             <div className="relative overflow-hidden rounded-t-xl -m-6 mb-6">
                                 <img
@@ -174,18 +124,20 @@ export default function HomeCourses() {
 
                             <div className="space-y-4">
                                 <div>
-                                    <h3 className="heading-sm text-[#002448] mb-2">{course.title}</h3>
-                                    <p className="text-[#64748B] font-medium">{course.university}</p>
+                                    <h3 className="heading-sm text-[#002448] mb-2 line-clamp-2">{course.title}</h3>
+                                    <p className="text-[#64748B] font-medium line-clamp-2">{course.university}</p>
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-4 text-sm">
                                     <div>
                                         <span className="text-[#64748B]">Duration:</span>
-                                        <p className="font-medium">{course.duration}</p>
+                                        <p className="font-medium">
+                                            {course.durationYears ? `${course.durationYears} Years` : 'Varies'}
+                                        </p>
                                     </div>
                                     <div>
                                         <span className="text-[#64748B]">Tuition:</span>
-                                        <p className="font-medium">{course.tuition}</p>
+                                        <p className="font-medium">{course.tuitionDisplay}</p>
                                     </div>
                                 </div>
 
@@ -205,7 +157,7 @@ export default function HomeCourses() {
                 </div>
 
                 {/* CTA Section */}
-                <div className={`text-center mt-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.6s' }}>
+                <div data-reveal className="text-center mt-16">
                     <div className="card-premium p-8 max-w-2xl mx-auto">
                         <h3 className="heading-md text-[#002448] mb-4">
                             Can't Find What You're Looking For?

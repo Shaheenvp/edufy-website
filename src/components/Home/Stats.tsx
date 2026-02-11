@@ -1,6 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { getGsap, getScrollTrigger } from '@/helpers/gsapClient';
+import { useGsapReveal } from '@/helpers/useGsapReveal';
 
 export default function StatsSection() {
     const [isVisible, setIsVisible] = useState(false);
@@ -11,30 +13,44 @@ export default function StatsSection() {
         successRate: 0
     });
 
+    const sectionRef = useRef<HTMLElement>(null);
+    useGsapReveal(sectionRef, { selector: '[data-reveal]', stagger: 0.08 });
+
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    animateCounters();
-                }
+        const el = sectionRef.current;
+        if (!el) return;
+
+        const reduce =
+            typeof window !== 'undefined' &&
+            window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+        if (reduce) return;
+
+        const gsap = getGsap();
+        const ScrollTrigger = getScrollTrigger();
+        let didRun = false;
+
+        const st = ScrollTrigger.create({
+            trigger: el,
+            start: 'top 75%',
+            onEnter: () => {
+                if (didRun) return;
+                didRun = true;
+                setIsVisible(true);
+                animateCounters();
             },
-            { threshold: 0.1 }
-        );
+        });
 
-        const element = document.getElementById('stats');
-        if (element) {
-            observer.observe(element);
-        }
-
-        return () => observer.disconnect();
+        return () => {
+            st.kill();
+            gsap.killTweensOf(el);
+        };
     }, []);
 
     const animateCounters = () => {
         const targets = {
-            students: 10000,
-            countries: 50,
-            universities: 500,
+            students: 20,
+            countries: 10,
+            universities: 10,
             successRate: 98
         };
 
@@ -66,8 +82,8 @@ export default function StatsSection() {
             id: 1,
             number: counters.students.toLocaleString(),
             suffix: '+',
-            label: 'Students Placed',
-            description: 'Successfully placed in top universities',
+            label: 'Medical Students Placed',
+            description: 'Successfully placed in medical programs',
             icon: '🎓',
             color: 'from-[#FF9257] to-[#EC651B]'
         },
@@ -75,8 +91,8 @@ export default function StatsSection() {
             id: 2,
             number: counters.countries,
             suffix: '+',
-            label: 'Countries',
-            description: 'Global presence and partnerships',
+            label: 'Focus Countries',
+            description: 'Top destinations we specialize in',
             icon: '🌍',
             color: 'from-[#EC651B] to-[#002448]'
         },
@@ -85,7 +101,7 @@ export default function StatsSection() {
             number: counters.universities,
             suffix: '+',
             label: 'Partner Universities',
-            description: 'World-class institutions worldwide',
+            description: 'Trusted universities & colleges',
             icon: '🏛️',
             color: 'from-[#002448] to-[#1E3A8A]'
         },
@@ -101,9 +117,9 @@ export default function StatsSection() {
     ];
 
     return (
-        <section id="stats" className="section-padding bg-white">
+        <section ref={sectionRef} id="stats" className="section-padding bg-white">
             <div className="container">
-                <div className={`text-center space-y-6 mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+                <div data-reveal className="text-center space-y-6 mb-16">
                     <div className="inline-flex items-center px-4 py-2 bg-[#FF9257]/10 rounded-full text-[#FF9257] font-medium text-sm">
                         <span className="w-2 h-2 bg-[#FF9257] rounded-full mr-2 animate-pulse"></span>
                         Our Impact
@@ -114,8 +130,8 @@ export default function StatsSection() {
                     </h2>
 
                     <p className="text-body max-w-2xl mx-auto">
-                        Our track record speaks for itself. We've helped thousands of students
-                        achieve their dreams of studying abroad at the world's most prestigious institutions.
+                        Our results speak for themselves. In just a few years, we've helped students
+                        start their medical education journey at trusted universities abroad.
                     </p>
                 </div>
 
@@ -124,8 +140,8 @@ export default function StatsSection() {
                     {stats.map((stat, index) => (
                         <div
                             key={stat.id}
-                            className={`card-premium p-8 text-center group hover-lift ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-                            style={{ animationDelay: `${index * 0.1}s` }}
+                            data-reveal
+                            className="card-premium p-8 text-center group hover-lift"
                         >
                             <div className="space-y-6">
                                 {/* Icon */}
@@ -167,12 +183,12 @@ export default function StatsSection() {
                 </div>
 
                 {/* Additional Premium Content */}
-                <div className={`mt-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
+                <div data-reveal className="mt-16">
                     <div className="card-premium p-8 bg-gradient-to-br from-[#F8FAFC] to-[#E2E8F0]">
                         <div className="grid md:grid-cols-3 gap-8 items-center">
                             <div className="text-center md:text-left">
-                                <h3 className="heading-md text-[#002448] mb-2">Award-Winning Service</h3>
-                                <p className="text-[#64748B]">Recognized as the best study abroad consultancy</p>
+                                <h3 className="heading-md text-[#002448] mb-2">Trusted Medical Education Partner</h3>
+                                <p className="text-[#64748B]">Expert guidance for your medical career journey</p>
                             </div>
 
                             <div className="text-center">

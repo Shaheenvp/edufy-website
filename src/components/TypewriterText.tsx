@@ -43,7 +43,7 @@ export default function TypewriterText({
     }, [currentText, isDeleting, currentTextIndex, texts, speed, deleteSpeed, pauseTime]);
 
     return (
-        <span className={className}>
+        <span className={className} suppressHydrationWarning>
             {currentText}
             <span className="animate-pulse">|</span>
         </span>

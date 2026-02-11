@@ -155,6 +155,14 @@ body {
   transform: translateY(-2px);
 }
 
+/* Simple line clamp utilities (no Tailwind plugin needed) */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
 /* Premium Animations */
 @keyframes fadeInUp {
   from {
@@ -358,6 +366,18 @@ body {
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   position: relative;
   overflow: hidden;
+}
+
+.hero-mouse-glow {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 146, 87, 0.15) 0%,
+    transparent 60%
+  );
 }
 
 .hero-section::before {

@@ -1,31 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useRef } from 'react';
 import ButtonDisplay from '../ButtonDisplay';
+import { useGsapReveal } from '@/helpers/useGsapReveal';
 
 export default function CTASection() {
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                }
-            },
-            { threshold: 0.1 }
-        );
-
-        const element = document.getElementById('cta');
-        if (element) {
-            observer.observe(element);
-        }
-
-        return () => observer.disconnect();
-    }, []);
+    const sectionRef = useRef<HTMLElement>(null);
+    useGsapReveal(sectionRef, { selector: '[data-reveal]', stagger: 0.08 });
 
     return (
-        <section id="cta" className="section-padding bg-gradient-to-br from-[#002448] to-[#1E3A8A] relative overflow-hidden">
+        <section ref={sectionRef} id="cta" className="section-padding bg-gradient-to-br from-[#002448] to-[#1E3A8A] relative overflow-hidden">
             {/* Premium Background Elements */}
             <div className="absolute inset-0">
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FF9257]/10 to-[#EC651B]/10"></div>
@@ -41,15 +25,15 @@ export default function CTASection() {
             </div>
 
             <div className="container relative z-10">
-                <div className={`text-center space-y-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+                <div className="text-center space-y-8">
                     {/* Premium Badge */}
-                    <div className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-md rounded-full border border-white/30 text-white font-semibold text-sm">
+                    <div data-reveal className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-md rounded-full border border-white/30 text-white font-semibold text-sm">
                         <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
                         Ready to Start Your Journey?
                     </div>
 
                     {/* Main Heading */}
-                    <div className="space-y-6">
+                    <div data-reveal className="space-y-6">
                         <h2 className="heading-lg text-white">
                             Your Dream University{' '}
                             <span className="bg-gradient-to-r from-[#FF9257] to-[#EC651B] bg-clip-text text-transparent">
@@ -59,14 +43,14 @@ export default function CTASection() {
 
                         <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
                             Join thousands of successful students who have achieved their dreams
-                            of studying at the world's most prestigious universities.
+                            of studying MBBS & Nursing at trusted universities abroad.
                             Let us guide you every step of the way.
                         </p>
                     </div>
 
                     {/* Premium Features */}
                     <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                        <div className="text-center space-y-4">
+                        <div data-reveal className="text-center space-y-4">
                             <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl mx-auto flex items-center justify-center text-2xl">
                                 🎯
                             </div>
@@ -74,7 +58,7 @@ export default function CTASection() {
                             <p className="text-white/80 text-sm">Tailored advice for your unique academic goals</p>
                         </div>
 
-                        <div className="text-center space-y-4">
+                        <div data-reveal className="text-center space-y-4">
                             <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl mx-auto flex items-center justify-center text-2xl">
                                 🚀
                             </div>
@@ -82,7 +66,7 @@ export default function CTASection() {
                             <p className="text-white/80 text-sm">Streamlined applications with 98% success rate</p>
                         </div>
 
-                        <div className="text-center space-y-4">
+                        <div data-reveal className="text-center space-y-4">
                             <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl mx-auto flex items-center justify-center text-2xl">
                                 💎
                             </div>
@@ -92,7 +76,7 @@ export default function CTASection() {
                     </div>
 
                     {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <div data-reveal className="flex flex-col sm:flex-row gap-4 justify-center">
                         <ButtonDisplay
                             text="Start Your Application"
                             px="px-8 py-4"
@@ -109,17 +93,14 @@ export default function CTASection() {
                     </div>
 
                     {/* Trust Indicators */}
-                    <div className="pt-8 border-t border-white/20">
-                        <p className="text-white/70 text-sm mb-4">Trusted by students from 50+ countries</p>
+                    <div data-reveal className="pt-8 border-t border-white/20">
+                        <p className="text-white/70 text-sm mb-4">Trusted by students across Eurasian countries</p>
                         <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-                            <div className="text-white/60 text-sm">🇺🇸 USA</div>
-                            <div className="text-white/60 text-sm">🇬🇧 UK</div>
-                            <div className="text-white/60 text-sm">🇨🇦 Canada</div>
-                            <div className="text-white/60 text-sm">🇦🇺 Australia</div>
+                            <div className="text-white/60 text-sm">🇬🇪 Georgia</div>
+                            <div className="text-white/60 text-sm">🇺🇿 Uzbekistan</div>
+                            <div className="text-white/60 text-sm">🇷🇺 Russia</div>
                             <div className="text-white/60 text-sm">🇩🇪 Germany</div>
-                            <div className="text-white/60 text-sm">🇫🇷 France</div>
-                            <div className="text-white/60 text-sm">🇳🇱 Netherlands</div>
-                            <div className="text-white/60 text-sm">🇸🇬 Singapore</div>
+                            <div className="text-white/60 text-sm">Eurasian countries</div>
                         </div>
                     </div>
                 </div>

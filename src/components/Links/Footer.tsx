@@ -82,7 +82,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <motion.a
-                href="https://facebook.com/edufyoverseas"
+                href="https://www.facebook.com/share/1XRgrLJZ8N/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#FF9257] transition-all duration-300 hover:scale-110"
@@ -92,7 +92,7 @@ export default function Footer() {
                 <Facebook className="text-white" />
               </motion.a>
               <motion.a
-                href="https://instagram.com/edufyoverseas"
+                href="https://www.instagram.com/edufy_overseas?igsh=MXhuN3JrM2M0bzB2ZQ=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#FF9257] transition-all duration-300 hover:scale-110"
@@ -112,7 +112,7 @@ export default function Footer() {
                 <LinkedIn className="text-white" />
               </motion.a>
               <motion.a
-                href="https://wa.me/919999999999"
+                href="https://wa.me/919400343442"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#25D366] transition-all duration-300 hover:scale-110"
@@ -186,8 +186,8 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="text-[#FF9257] flex-shrink-0" />
-                <a href="tel:+919999999999" className="text-gray-300 hover:text-[#FF9257] transition-colors duration-300">
-                  +91 99999 99999
+                <a href="tel:+919400343442" className="text-gray-300 hover:text-[#FF9257] transition-colors duration-300">
+                  +91 94003 43442
                 </a>
               </div>
               <div className="flex items-center space-x-3">
@@ -243,6 +243,12 @@ export default function Footer() {
               </p>
               <p className="text-gray-400 text-xs mt-1">
                 Specialized in Medical Education | Georgia • Uzbekistan • Russia
+              </p>
+              <p className="text-gray-500 text-xs mt-2 flex items-center justify-center md:justify-start gap-1">
+                Designed & Developed by
+                <span className="text-[#FF9257] font-medium hover:text-[#EC651B] transition-colors duration-300">
+                  Adnora Productions
+                </span>
               </p>
             </div>
             <div className="flex items-center space-x-6 text-sm">

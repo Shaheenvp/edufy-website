@@ -5,9 +5,13 @@ import React from 'react';
 import Headers from '../Headers';
 import colors from './../../helpers/colors';
 import ImageDisplay from '../ImageDisplay';
+import { useRef } from 'react';
+import { useGsapReveal } from '@/helpers/useGsapReveal';
 
 const Steps = () => {
   const color = colors();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  useGsapReveal(sectionRef as unknown as React.RefObject<HTMLElement>, { selector: '[data-reveal]', stagger: 0.07 });
   const features = [
     {
       icon: <Person className="w-8 h-8 text-white" aria-label="Initial Consultation" />,
@@ -32,11 +36,11 @@ const Steps = () => {
   ];
 
   return (
-    <div className="bg-gray-50 py-16 2xl:px-[10em] md:px-[3em] px-[1em] h-full">
+    <div ref={sectionRef} className="bg-gray-50 py-16 2xl:px-[10em] md:px-[3em] px-[1em] h-full">
       <div>
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:gap-12 gap-5 items-center">
           {/* Left: Person image area */}
-          <div>
+          <div data-reveal>
             <div className="bg-gradient-to-br from-orange-400 to-orange-500 rounded-3xl p-3 md:p-2 overflow-hidden">
               <ImageDisplay
                 src="/Student.jpeg"
@@ -47,11 +51,14 @@ const Steps = () => {
           </div>
           {/* Right: Main steps/features */}
           <div>
-            <Headers text="Our Student Onboarding Process" className="text-center md:text-start" />
+            <div data-reveal>
+              <Headers text="Our Student Onboarding Process" className="text-center md:text-start" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {features.map((feature, idx) => (
                 <div
                   key={idx}
+                  data-reveal
                   className="group bg-gray-200 rounded-xl md:p-3 p-6 hover:transform hover:scale-105 transition-all duration-300"
                 >
                   <div className="flex items-center 2xl:gap-[1em] gap-2">
