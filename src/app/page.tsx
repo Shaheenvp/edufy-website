@@ -15,6 +15,7 @@ import ProgressIndicator from "@/components/ProgressIndicator";
 import PremiumTestimonialsSection from "@/components/Home/Testimonials";
 import StatsSection from "@/components/Home/Stats";
 import CTASection from "@/components/Home/CTASection";
+import ConsultationForm from "@/components/ConsultationForm";
 
 export default function Home() {
   return (
@@ -130,6 +131,9 @@ export default function Home() {
 
       {/* Scroll to Top Button - Bottom Right */}
       <ScrollToTop />
+
+      {/* Consultation Form Modal */}
+      <ConsultationForm />
     </div>
   );
 }
